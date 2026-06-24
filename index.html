@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AltTenant - Escape the Landlord Trap</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen pb-24">
+
+    <!-- Top Sticky Header -->
+    <header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-slate-100 z-40 px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="bg-indigo-600 p-2 rounded-xl text-white">
+                <i data-lucide="shield-alert" class="w-5 h-5"></i>
+            </div>
+            <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">AltTenant</span>
+        </div>
+        <div class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> MVP Beta
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto px-4 pt-4">
+        
+        <!-- SECTION 1: DASHBOARD / SCORE (Default Active) -->
+        <section id="tab-score" class="tab-content space-y-6">
+            <!-- Hero Value Proposition -->
+            <div class="bg-gradient-to-br from-slate-900 to-indigo-950 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl"></div>
+                <p class="text-xs font-medium uppercase tracking-wider text-indigo-300 mb-1">Your Rental Leverage</p>
+                <h1 class="text-2xl font-bold leading-tight mb-4">Stop freezing lakhs in security deposits.</h1>
+                
+                <!-- Score Display -->
+                <div class="flex items-center justify-between bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
+                    <div>
+                        <p class="text-xs text-slate-400">Current AltTenant Score</p>
+                        <p class="text-3xl font-black text-emerald-400 mt-1" id="score-value">785</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full">Excellent</span>
+                        <p class="text-xs text-slate-300 mt-1">Eligible for 1-Mo Deposit</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Verification Checkpoints -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm space-y-4">
+                <h2 class="font-bold text-base flex items-center gap-2">
+                    <i data-lucide="verified" class="w-5 h-5 text-indigo-600"></i> Boost Your Score
+                </h2>
+                <p class="text-xs text-slate-500 -mt-2">Link your work and payment profiles to bypass huge upfront deposits.</p>
+                
+                <!-- Verification Row 1 -->
+                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-indigo-100 text-indigo-600 rounded-lg"><i data-lucide="mail" class="w-4 h-4"></i></div>
+                        <div>
+                            <p class="text-sm font-semibold">Corporate Email</p>
+                            <p class="text-xs text-slate-400">Proves verified employment</p>
+                        </div>
+                    </div>
+                    <button class="bg-indigo-600 text-white text-xs font-medium px-3 py-1.5 rounded-lg shadow-sm">Verify</button>
+                </div>
+
+                <!-- Verification Row 2 -->
+                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><i data-lucide="wallet" class="w-4 h-4"></i></div>
+                        <div>
+                            <p class="text-sm font-semibold">UPI Rent History</p>
+                            <p class="text-xs text-slate-400">Fetch continuous past payments</p>
+                        </div>
+                    </div>
+                    <button class="bg-indigo-600 text-white text-xs font-medium px-3 py-1.5 rounded-lg shadow-sm">Link UPI</button>
+                </div>
+            </div>
+
+            <!-- Features Quick Links -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between h-28" onclick="switchTab('dispute')">
+                    <div class="p-2 bg-rose-50 text-rose-600 rounded-xl w-fit"><i data-lucide="gavel" class="w-5 h-5"></i></div>
+                    <div>
+                        <p class="font-bold text-sm">Dispute Tool</p>
+                        <p class="text-xs text-slate-400">Fight painting charges</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between h-28" onclick="switchTab('dispute')">
+                    <div class="p-2 bg-amber-50 text-amber-600 rounded-xl w-fit"><i data-lucide="file-text" class="w-5 h-5"></i></div>
+                    <div>
+                        <p class="font-bold text-sm">Legal Notices</p>
+                        <p class="text-xs text-slate-400">Get stuck deposit back</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: LEGAL DISPUTE GENERATOR (Hidden by default) -->
+        <section id="tab-dispute" class="tab-content space-y-6 hidden">
+            <div class="space-y-2">
+                <h1 class="text-xl font-bold tracking-tight">Legal Dispute Generator</h1>
+                <p class="text-sm text-slate-500">Automated legal backing under the Indian Model Tenancy Act, 2021.</p>
+            </div>
+
+            <!-- Interactive Form Panel -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">What is the issue?</label>
+                    <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option>Landlord refusing to refund security deposit</option>
+                        <option>Unfair deductions for painting & cleaning</option>
+                        <option>Sudden eviction without notice period</option>
+                        <option>Brokerage trap / False promises</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Total Deposit (₹)</label>
+                        <input type="number" value="50000" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Unfair Deduction (₹)</label>
+                        <input type="number" value="15000" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <button onclick="generateDraft()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold p-3.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i> Generate Legal Notice Draft
+                </button>
+            </div>
+
+            <!-- Document Output Preview Box -->
+            <div id="preview-box" class="bg-amber-50/50 border border-amber-200 rounded-2xl p-4 hidden space-y-3">
+                <div class="flex justify-between items-center border-b border-amber-200/60 pb-2">
+                    <span class="text-xs font-bold text-amber-800 flex items-center gap-1"><i data-lucide="file-check" class="w-3.5 h-3.5"></i> Generated Draft Notice</span>
+                    <button class="text-xs text-indigo-600 font-semibold" onclick="alert('Notice downloaded as PDF!')">Download PDF</button>
+                </div>
+                <div class="text-[11px] font-serif text-slate-700 leading-relaxed max-h-40 overflow-y-auto hide-scrollbar bg-white p-3 border border-amber-100 rounded-xl">
+                    <strong>LEGAL NOTICE FOR REFUND OF SECURITY DEPOSIT</strong><br><br>
+                    Under Section 11 of the Model Tenancy Act, 2021 (and relevant state Rent Control provisions), security deposit for residential premises is strictly capped at a maximum of two months' rent. Any arbitrary deduction toward routine wear-and-tear, painting, or deep cleaning without itemized professional receipts is a material breach of tenancy rights...
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Fixed Bottom Tab Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-100 py-2 px-6 flex justify-around items-center max-w-md mx-auto z-50 shadow-lg">
+        <button onclick="switchTab('score')" id="nav-score" class="flex flex-col items-center gap-0.5 text-indigo-600 nav-btn">
+            <i data-lucide="badge-check" class="w-5 h-5"></i>
+            <span class="text-[10px] font-bold">AltScore</span>
+        </button>
+        <button onclick="switchTab('dispute')" id="nav-dispute" class="flex flex-col items-center gap-0.5 text-slate-400 nav-btn">
+            <i data-lucide="gavel" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Disputes</span>
+        </button>
+        <a href="https://t.me/your_placeholder_group" target="_blank" class="flex flex-col items-center gap-0.5 text-slate-400">
+            <i data-lucide="users" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Community</span>
+        </a>
+    </nav>
+
+    <!-- Minimal Router Javascript -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Simple Single Page App Tab Switcher
+        function switchTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            // Reset nav colors
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('text-indigo-600');
+                el.classList.add('text-slate-400');
+                el.querySelector('span').classList.remove('font-bold');
+                el.querySelector('span').classList.add('font-semibold');
+            });
+
+            // Show active tab content
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            // Highlight active nav icon
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if(activeNav) {
+                activeNav.classList.remove('text-slate-400');
+                activeNav.classList.add('text-indigo-600');
+                activeNav.querySelector('span').classList.add('font-bold');
+            }
+        }
+
+        // Action Trigger
+        function generateDraft() {
+            const preview = document.getElementById('preview-box');
+            preview.classList.remove('hidden');
+            preview.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
